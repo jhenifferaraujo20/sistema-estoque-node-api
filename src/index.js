@@ -3,12 +3,16 @@ import express from "express";
 import cors from "cors";
 import produtosRouter from "./routers/produtosRouter.js";
 import usersRoute from "./routers/usuariosRouter.js";
+import authMiddleware from "./middlewares/authMiddleware.js";
 
 const server = express();
 server.use(cors({ origin: "*" }));
 server.use(express.json());
 
 const port = process.env.PORT || 3000;
+
+server.use('/produtos', produtosRouter);
+server.use('/produtos', authMiddleware, produtosRouter);
 
 server.use(produtosRouter);
 server.use(usersRoute);

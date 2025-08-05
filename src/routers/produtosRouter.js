@@ -1,9 +1,10 @@
 import express from "express";
 import { findAll, findById, save, update, remove } from "../services/produtosService.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 const produtosRouter = express.Router();
 
-produtosRouter.get("/produtos", async (req, res) => {
+produtosRouter.get("/produtos", authMiddleware, async (req, res) => {
     try {
         const products = await findAll();
         res.status(200).json(products);
@@ -12,7 +13,7 @@ produtosRouter.get("/produtos", async (req, res) => {
     }
 });
 
-produtosRouter.get("/produtos/:id", async (req, res) => {
+produtosRouter.get("/produtos/:id", authMiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const product = await findById(id);
@@ -27,7 +28,7 @@ produtosRouter.get("/produtos/:id", async (req, res) => {
     }
 });
 
-produtosRouter.post("/produtos", async (req, res) => {
+produtosRouter.post("/produtos", authMiddleware, async (req, res) => {
     try {
         const newProductData = req.body;
         await save(newProductData);
@@ -37,7 +38,7 @@ produtosRouter.post("/produtos", async (req, res) => {
     }
 });
 
-produtosRouter.put("/produtos/:id", async (req, res) => {
+produtosRouter.put("/produtos/:id", authMiddleware, async (req, res) => {
     try {
         const id = req.params.id;
         const updatedProductData = req.body;
@@ -53,7 +54,7 @@ produtosRouter.put("/produtos/:id", async (req, res) => {
     }   
 });
 
-produtosRouter.delete("/produtos/:id", async (req, res) => {
+produtosRouter.delete("/produtos/:id", authMiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const flag = await remove(id);

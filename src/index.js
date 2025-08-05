@@ -11,9 +11,6 @@ server.use(express.json());
 
 const port = process.env.PORT || 3000;
 
-server.use('/produtos', produtosRouter);
-server.use('/produtos', authMiddleware, produtosRouter);
-
 server.use(produtosRouter);
 server.use(usersRoute);
 

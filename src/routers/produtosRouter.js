@@ -1,9 +1,10 @@
 import express from "express";
 import { findAll, findById, save, update, remove } from "../services/produtosService.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 const produtosRouter = express.Router();
 
-produtosRouter.get("/produtos", async (req, res) => {
+produtosRouter.get("/produtos", authMiddleware, async (req, res) => {
     try {
         const products = await findAll();
         res.status(200).json(products);

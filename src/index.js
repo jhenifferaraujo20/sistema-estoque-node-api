@@ -3,7 +3,6 @@ import express from "express";
 import cors from "cors";
 import produtosRouter from "./routers/produtosRouter.js";
 import usersRoute from "./routers/usuariosRouter.js";
-import authMiddleware from "./middlewares/authMiddleware.js";
 
 const server = express();
 server.use(cors({ origin: "*" }));

@@ -1,3 +1,4 @@
+import { getAuth } from "firebase-admin/auth";
 import app from "../firebase/app.js";
 
 export default async function authMiddleware(req, res, next) {
